@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+    // Core
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-core'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-rest'
+
+    // HTTP
+    implementation 'org.apache.camel.quarkus:camel-quarkus-http'
+
+    // Serialization
+    implementation 'org.apache.camel.quarkus:camel-quarkus-jackson'
+
+    // Metrics
+    implementation 'org.apache.camel.quarkus:camel-quarkus-microprofile-health'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-microprofile-metrics'
+
+    // Tests
+    testImplementation 'io.quarkus:quarkus-junit5'
+}
+
+group 'com.mebr0'
+version '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
