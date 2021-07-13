@@ -1,52 +1,49 @@
-# integrated-twitter Project
+# integrated-twitter
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Service for social networks without own data, **INTEGRATION ONLY**.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## External services
 
-## Running the application in dev mode
+1. [Social network] - main source of data
 
-You can run your application in dev mode that enables live coding using:
+## Check list
 
-```shell script
-./gradlew quarkusDev
-```
+REST API
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+- [ ] JSON and/or XML endpoints
+- [ ] Openapi & Swagger
+- [ ] Validation
 
-## Packaging and running the application
+Data
 
-The application can be packaged using:
+- [ ] Transformations
 
-```shell script
-./gradlew build
-```
+HTTP
 
-It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory. Be aware that it’s not an _über-jar_ as
-the dependencies are copied into the `build/quarkus-app/lib/` directory.
+- [ ] HTTP Requests
+- [ ] HTTP Statuses (errors)
 
-If you want to build an _über-jar_, execute the following command:
+## Commands
 
-```shell script
-./gradlew build -Dquarkus.package.type=uber-jar
-```
+### Dev mode
 
-The application is now runnable using `java -jar build/quarkus-app/quarkus-run.jar`.
+`./gradlew quarkusDev` - live coding
 
-## Creating a native executable
+### JVM mode
 
-You can create a native executable using:
+`./gradlew build` - build project
 
-```shell script
-./gradlew build -Dquarkus.package.type=native
-```
+`./gradlew build -Dquarkus.package.type=uber-jar` - build project with uber jar
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+`java -jar build/quarkus-app/quarkus-run.jar` - run artifact
 
-```shell script
-./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
-```
+### Native mode
 
-You can then execute your native executable with: `./build/integrated-twitter-1.0-SNAPSHOT-runner`
+`./gradlew build -Dquarkus.package.type=native` - build project to native executable
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.
+`./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true` - 
+build project to native executable (without GraalVM)
+
+`./build/integrated-twitter-1.0-SNAPSHOT-runner` - run artifact
+
+[Social network]: https://jsonplaceholder.typicode.com
