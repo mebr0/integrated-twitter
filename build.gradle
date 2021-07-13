@@ -26,6 +26,12 @@ dependencies {
     implementation 'org.apache.camel.quarkus:camel-quarkus-microprofile-health'
     implementation 'org.apache.camel.quarkus:camel-quarkus-microprofile-metrics'
 
+    // Docs
+    implementation 'org.apache.camel.quarkus:camel-quarkus-openapi-java'
+
+    // Code Gen
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+
     // Tests
     testImplementation 'io.quarkus:quarkus-junit5'
 }
