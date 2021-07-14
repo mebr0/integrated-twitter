@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@JsonPropertyOrder({"id", "title", "body", "userId"})
+@JsonPropertyOrder({ "id", "title", "body", "userId" })
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
