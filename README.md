@@ -23,6 +23,10 @@ HTTP
 - [ ] HTTP Requests
 - [ ] HTTP Statuses (errors)
 
+Docker
+
+- [x] Dockerfile for JVM mode
+
 Tests
 
 - [x] Integration tests
@@ -56,5 +60,9 @@ Tests
 build project to native executable (without GraalVM)
 
 `./build/integrated-twitter-1.0-SNAPSHOT-runner` - run artifact
+
+### Docker
+
+Use Dockerfile in root of project for containerization of app
 
 [Social network]: https://jsonplaceholder.typicode.com
