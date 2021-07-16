@@ -2,6 +2,7 @@ package com.mebr0.rest;
 
 import com.mebr0.dto.Comment;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -56,7 +57,7 @@ public class CommentsRestTest {
                 when().
                 pathParam("id", postId).
                 body(writer.toString()).
-                header("Content-Type", "application/xml").
+                contentType(ContentType.XML).
                 post("/posts/{id}/comments").
                 then().
                 statusCode(201).
@@ -99,7 +100,7 @@ public class CommentsRestTest {
                 pathParam("postId", postId).
                 pathParam("id", id).
                 body(writer.toString()).
-                header("Content-Type", "application/xml").
+                contentType(ContentType.XML).
                 put("/posts/{postId}/comments/{id}").
                 then().
                 statusCode(200).

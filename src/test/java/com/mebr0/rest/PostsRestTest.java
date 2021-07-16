@@ -2,6 +2,7 @@ package com.mebr0.rest;
 
 import com.mebr0.dto.Post;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -41,7 +42,7 @@ public class PostsRestTest {
         var createdPost = given().
                 when().
                 body(postToCreate).
-                header("Content-Type", "application/json").
+                contentType(ContentType.JSON).
                 post("/posts").
                 then().
                 statusCode(201).
@@ -80,7 +81,7 @@ public class PostsRestTest {
                 when().
                 pathParam("id", id).
                 body(postToUpdate).
-                header("Content-Type", "application/json").
+                contentType(ContentType.JSON).
                 put("/posts/{id}").
                 then().
                 statusCode(200).
