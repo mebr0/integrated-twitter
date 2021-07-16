@@ -1,7 +1,9 @@
 package com.mebr0;
 
+import lombok.NoArgsConstructor;
 import org.apache.camel.builder.RouteBuilder;
 
+@NoArgsConstructor
 public class TwitterAPI extends RouteBuilder {
 
     @Override
