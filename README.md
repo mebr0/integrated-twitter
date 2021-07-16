@@ -31,6 +31,8 @@ HTTP
 
 ### JVM mode
 
+`./gradlew test` - run integration tests
+
 `./gradlew build` - build project
 
 `./gradlew build -Dquarkus.package.type=uber-jar` - build project with uber jar
