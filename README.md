@@ -23,6 +23,12 @@ HTTP
 - [ ] HTTP Requests
 - [ ] HTTP Statuses (errors)
 
+Tests
+
+- [x] Integration tests
+- [x] Coverage reports
+- [x] Sonarqube reports
+
 ## Commands
 
 ### Dev mode
