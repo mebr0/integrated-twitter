@@ -27,6 +27,12 @@ Docker
 
 - [x] Dockerfile for JVM mode
 
+Tests
+
+- [x] Integration tests
+- [x] Coverage reports
+- [x] Sonarqube reports
+
 ## Commands
 
 ### Dev mode
@@ -34,6 +40,11 @@ Docker
 `./gradlew quarkusDev` - live coding
 
 ### JVM mode
+
+`./gradlew test` - run integration tests and generate coverage reports
+
+`./gradlew sonarqube` - send coverage reports to sonarqube 
+(define `sonar.login` and `sonar.organization` properties)
 
 `./gradlew build` - build project
 
