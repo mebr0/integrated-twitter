@@ -51,7 +51,7 @@ jobs:
         with:
           name: last-test-artifact
           path: |
-            build
+            build/
           retention-days: 1
 
   sonar:
@@ -84,8 +84,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-
-      - run: ls
 
       - name: Send report to sonar
         run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=${GITHUB_REF#refs/heads/}
@@ -137,7 +135,7 @@ jobs:
         with:
           name: last-build-artifact
           path: |
-            build
+            build/
           retention-days: 1
 
   docker:
@@ -151,9 +149,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: last-build-artifact
-          path: build
-
-      - run: ls
 
       - name: Build Docker Image
         run: docker build -t mebr0/integrated-twitter .
