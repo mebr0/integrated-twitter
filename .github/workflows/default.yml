@@ -148,5 +148,7 @@ jobs:
         with:
           name: last-build-artifact
 
+      - run: ls build
+
       - name: Build Docker Image
         run: docker build -t mebr0/integrated-twitter .
