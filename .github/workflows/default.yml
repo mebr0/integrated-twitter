@@ -85,7 +85,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Send report to sonar
-        run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=$GITHUB_REF
+        run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=${GITHUB_REF##*/}
         env:
           SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
           SONAR_LOGIN: ${{secrets.SONAR_LOGIN}}
