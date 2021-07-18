@@ -65,6 +65,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: last-test-artifact
+          path: build
 
       - name: Install JDK 11
         uses: actions/setup-java@v2
@@ -149,6 +150,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: last-build-artifact
+          path: build
 
       - name: Build Docker Image
         run: docker build -t mebr0/integrated-twitter .
