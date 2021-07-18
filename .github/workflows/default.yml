@@ -86,6 +86,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - run: ls && ls build
+
       - name: Send report to sonar
         run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=${GITHUB_REF#refs/heads/}
         env:
