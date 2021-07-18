@@ -50,7 +50,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: last-test-artifact
-          path: build
+          path: |
+            build
           retention-days: 1
 
   sonar:
@@ -133,7 +134,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: last-build-artifact
-          path: build
+          path: |
+            build
           retention-days: 1
 
   docker:
