@@ -76,6 +76,13 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
+      - name: Cache SonarQube packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
@@ -86,7 +93,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - run: ls && ls build
+      - run: ls build
 
       - name: Send report to sonar
         run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=${GITHUB_REF#refs/heads/}
