@@ -41,6 +41,8 @@ jobs:
       - name: Run tests
         run: ./gradlew test
 
+      - run: cat build/customJacocoReportDir/test/jacocoTestReport.xml
+
       - name: Cleanup Gradle Cache
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
@@ -93,7 +95,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - run: ls build
+      - run: cat build/customJacocoReportDir/test/jacocoTestReport.xml
 
       - name: Send report to sonar
         run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=${GITHUB_REF#refs/heads/} --info
