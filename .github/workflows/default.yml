@@ -98,11 +98,10 @@ jobs:
       - run: cat build/customJacocoReportDir/test/jacocoTestReport.xml
 
       - name: Send report to sonar
-        run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=${GITHUB_REF#refs/heads/} --info
+        run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.branch.name=${GITHUB_REF#refs/heads/} -Dsonar.jacoco.reportPaths=build/customJacocoReportDir/test/jacocoTestReport.xml
         env:
           SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
           SONAR_LOGIN: ${{secrets.SONAR_LOGIN}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cleanup Gradle Cache
         run: |
