@@ -4,20 +4,12 @@ import com.mebr0.dto.Comment;
 import com.mebr0.dto.CommentList;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.jackson.ListJacksonDataFormat;
-import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.model.rest.RestParamType;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import java.util.List;
 
 public class CommentsRest extends RouteBuilder {
 
     @Override
-    public void configure() throws JAXBException {
-        var jaxbCommentDataFormat = new JaxbDataFormat(JAXBContext.newInstance(Comment.class));
-
+    public void configure() {
         rest().
             produces("application/xml").
 
@@ -30,11 +22,7 @@ public class CommentsRest extends RouteBuilder {
                 endResponseMessage().
 
                 route().
-                removeHeaders("CamelHttp*").
-                removeHeaders("Accept*").
-                toD("{{blogs.url}}/posts/${headers.postId}/comments?bridgeEndpoint=true").
-                unmarshal(new ListJacksonDataFormat(Comment.class)).
-                setBody().exchange(exchange -> new CommentList(exchange.getIn().getBody(List.class))).
+                to("direct:service-list_comments").
                 marshal().jaxb().
                 endRest().
 
@@ -49,13 +37,7 @@ public class CommentsRest extends RouteBuilder {
                 consumes("application/xml").
 
                 route().
-                removeHeaders("CamelHttp*").
-                removeHeaders("Accept*").
-                unmarshal(jaxbCommentDataFormat).
-                marshal().json().
-                setHeader(Exchange.HTTP_METHOD, constant("POST")).
-                toD("{{blogs.url}}/posts/${headers.postId}/comments?bridgeEndpoint=true").
-                unmarshal().json(Comment.class).
+                to("direct:service-create_comment").
                 marshal().jaxb().
                 setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201)).
                 endRest().
@@ -70,10 +52,7 @@ public class CommentsRest extends RouteBuilder {
                 endResponseMessage().
 
                 route().
-                removeHeaders("CamelHttp*").
-                removeHeaders("Accept*").
-                toD("{{blogs.url}}/comments/${headers.id}?bridgeEndpoint=true").
-                unmarshal().json(Comment.class).
+                to("direct:service-get_comment").
                 marshal().jaxb().
                 endRest().
 
@@ -89,13 +68,7 @@ public class CommentsRest extends RouteBuilder {
                 consumes("application/xml").
 
                 route().
-                removeHeaders("CamelHttp*").
-                removeHeaders("Accept*").
-                unmarshal(jaxbCommentDataFormat).
-                marshal().json().
-                setHeader(Exchange.HTTP_METHOD, constant("PUT")).
-                toD("{{blogs.url}}/comments/${headers.id}?bridgeEndpoint=true").
-                unmarshal().json(Comment.class).
+                to("direct:service-update_comment").
                 marshal().jaxb().
                 endRest().
 
@@ -109,10 +82,7 @@ public class CommentsRest extends RouteBuilder {
                 endResponseMessage().
 
                 route().
-                removeHeaders("CamelHttp*").
-                removeHeaders("Accept*").
-                setHeader(Exchange.HTTP_METHOD, constant("DELETE")).
-                toD("{{blogs.url}}/comments/${headers.id}?bridgeEndpoint=true").
+                to("direct:service-delete_comment").
                 setBody().constant(null).
                 setHeader(Exchange.HTTP_RESPONSE_CODE, constant(204)).
                 endRest();
