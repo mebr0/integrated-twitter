@@ -78,6 +78,8 @@ jacocoTestReport {
 
 sonarqube {
     properties {
-        property 'sonar.host.url', 'https://sonarcloud.io'
+        property "sonar.projectKey", "com.mebr0:integrated-twitter"
+        property "sonar.organization", "mebr0"
+        property "sonar.host.url", "https://sonarcloud.io"
     }
 }
