@@ -1,4 +1,4 @@
-# integrated-twitter
+# integrated-twitter ![develop](https://github.com/mebr0/integrated-twitter/actions/workflows/develop.yml/badge.svg)
 
 Service for social networks without own data, **INTEGRATION ONLY**.
 
