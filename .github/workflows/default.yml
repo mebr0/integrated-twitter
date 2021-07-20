@@ -30,6 +30,8 @@ jobs:
 
       - run: git fetch
 
+      - run: git branch
+
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
