@@ -39,11 +39,12 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Run tests
-        run: ./gradlew build sonarqube -Dsonar.login=$SONAR_LOGIN -Dsonar.organization=$SONAR_ORGANIZATION
+        run: ./gradlew build sonarqube --info
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
-          SONAR_LOGIN: ${{secrets.SONAR_LOGIN}}
+          # SONAR_ORGANIZATION: ${{secrets.SONAR_ORGANIZATION}}
+          # SONAR_LOGIN: ${{secrets.SONAR_LOGIN}}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - run: cat build/customJacocoReportDir/test/jacocoTestReport.xml
 
