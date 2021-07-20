@@ -40,6 +40,8 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
 
+      - run: git fetch
+
       - name: Run tests
         run: ./gradlew build sonarqube --info
         env:
