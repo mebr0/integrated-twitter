@@ -1,23 +1,14 @@
 package com.mebr0.dao;
 
-import com.mebr0.dto.Comment;
-import com.mebr0.dto.CommentList;
 import com.mebr0.dto.Post;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.ListJacksonDataFormat;
-import org.apache.camel.converter.jaxb.JaxbDataFormat;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import java.util.List;
 
 public class PostsDao extends RouteBuilder {
 
     @Override
-    public void configure() throws JAXBException {
-        var jaxbCommentDataFormat = new JaxbDataFormat(JAXBContext.newInstance(Comment.class));
-
+    public void configure() {
         from("direct:dao-list_posts").
                 removeHeaders("CamelHttp*").
                 removeHeaders("Accept*").

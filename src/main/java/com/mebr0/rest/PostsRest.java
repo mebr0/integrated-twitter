@@ -3,7 +3,6 @@ package com.mebr0.rest;
 import com.mebr0.dto.Post;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.jackson.ListJacksonDataFormat;
 import org.apache.camel.model.rest.RestParamType;
 
 public class PostsRest extends RouteBuilder {

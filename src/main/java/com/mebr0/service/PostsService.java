@@ -5,7 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 public class PostsService extends RouteBuilder {
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
         from("direct:service-list_posts").
                 to("direct:dao-list_posts");
 
