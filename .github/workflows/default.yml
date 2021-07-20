@@ -25,6 +25,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'adopt'
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
@@ -74,6 +75,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'adopt'
 
       - name: Cache SonarQube packages
         uses: actions/cache@v1
@@ -116,6 +118,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'adopt'
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
