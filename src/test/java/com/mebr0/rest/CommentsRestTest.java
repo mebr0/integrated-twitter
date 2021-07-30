@@ -31,10 +31,10 @@ public class CommentsRestTest {
     @Test
     public void testListComments() {
         given().
-                when().
+            when().
                 pathParam("id", postId).
                 get("/posts/{id}/comments").
-                then().
+            then().
                 statusCode(200).
                 body("comments", notNullValue()).
                 body("comments.size()", greaterThan(0)).
@@ -54,12 +54,12 @@ public class CommentsRestTest {
         marshaller.marshal(commentToCreate, writer);
 
         given().
-                when().
+            when().
                 pathParam("id", postId).
                 body(writer.toString()).
                 contentType(ContentType.XML).
                 post("/posts/{id}/comments").
-                then().
+            then().
                 statusCode(201).
                 body("comment", notNullValue()).
                 body("comment.id", notNullValue()).
@@ -73,11 +73,11 @@ public class CommentsRestTest {
     @ValueSource(longs = {1, 3, 4, 50})
     public void testGetComment(Long id) {
         given().
-                when().
+            when().
                 pathParam("postId", postId).
                 pathParam("id", id).
                 get("/posts/{postId}/comments/{id}").
-                then().
+            then().
                 statusCode(200).
                 body("comment", notNullValue()).
                 body("comment.id", equalTo(id.toString())).
@@ -96,13 +96,13 @@ public class CommentsRestTest {
         marshaller.marshal(commentToUpdate, writer);
 
         given().
-                when().
+            when().
                 pathParam("postId", postId).
                 pathParam("id", id).
                 body(writer.toString()).
                 contentType(ContentType.XML).
                 put("/posts/{postId}/comments/{id}").
-                then().
+            then().
                 statusCode(200).
                 body("comment", notNullValue()).
                 body("comment.id", notNullValue()).
@@ -116,11 +116,11 @@ public class CommentsRestTest {
     @ValueSource(longs = {1, 3, 4, 50})
     public void testDeleteComment(Long id) {
         given().
-                when().
+            when().
                 pathParam("postId", postId).
                 pathParam("id", id).
                 delete("/posts/{postId}/comments/{id}").
-                then().
+            then().
                 statusCode(204);
     }
 }
