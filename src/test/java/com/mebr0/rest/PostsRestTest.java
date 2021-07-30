@@ -34,8 +34,8 @@ public class PostsRestTest {
 
         given().
             when().
-                body(postToCreate).
                 contentType(ContentType.JSON).
+                body(postToCreate).
                 post("/posts").
             then().
                 statusCode(201).
@@ -69,8 +69,8 @@ public class PostsRestTest {
         given().
             when().
                 pathParam("id", id).
-                body(postToUpdate).
                 contentType(ContentType.JSON).
+                body(postToUpdate).
                 put("/posts/{id}").
             then().
                 statusCode(200).
