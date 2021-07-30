@@ -3,15 +3,9 @@ package com.mebr0.rest;
 import com.mebr0.dto.Comment;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.StringWriter;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -21,20 +15,13 @@ public class CommentsRestTest {
 
     private final Long postId = 1L;
 
-    private static Marshaller marshaller;
-
-    @BeforeAll
-    public static void init() throws JAXBException {
-        marshaller = JAXBContext.newInstance(Comment.class).createMarshaller();
-    }
-
     @Test
     public void testListComments() {
         given().
-                when().
+            when().
                 pathParam("id", postId).
                 get("/posts/{id}/comments").
-                then().
+            then().
                 statusCode(200).
                 body("comments", notNullValue()).
                 body("comments.size()", greaterThan(0)).
@@ -47,19 +34,16 @@ public class CommentsRestTest {
     }
 
     @Test
-    public void testCreateComment() throws JAXBException {
+    public void testCreateComment() {
         var commentToCreate = new Comment(null, "name", "body", "email", null);
 
-        var writer = new StringWriter();
-        marshaller.marshal(commentToCreate, writer);
-
         given().
-                when().
+            when().
                 pathParam("id", postId).
-                body(writer.toString()).
                 contentType(ContentType.XML).
+                body(commentToCreate).
                 post("/posts/{id}/comments").
-                then().
+            then().
                 statusCode(201).
                 body("comment", notNullValue()).
                 body("comment.id", notNullValue()).
@@ -73,11 +57,11 @@ public class CommentsRestTest {
     @ValueSource(longs = {1, 3, 4, 50})
     public void testGetComment(Long id) {
         given().
-                when().
+            when().
                 pathParam("postId", postId).
                 pathParam("id", id).
                 get("/posts/{postId}/comments/{id}").
-                then().
+            then().
                 statusCode(200).
                 body("comment", notNullValue()).
                 body("comment.id", equalTo(id.toString())).
@@ -89,20 +73,17 @@ public class CommentsRestTest {
 
     @ParameterizedTest
     @ValueSource(longs = {1, 3, 4, 50})
-    public void testUpdateComment(Long id) throws JAXBException {
+    public void testUpdateComment(Long id) {
         var commentToUpdate = new Comment(null, "name", "body", "email", null);
 
-        var writer = new StringWriter();
-        marshaller.marshal(commentToUpdate, writer);
-
         given().
-                when().
+            when().
                 pathParam("postId", postId).
                 pathParam("id", id).
-                body(writer.toString()).
                 contentType(ContentType.XML).
+                body(commentToUpdate).
                 put("/posts/{postId}/comments/{id}").
-                then().
+            then().
                 statusCode(200).
                 body("comment", notNullValue()).
                 body("comment.id", notNullValue()).
@@ -116,11 +97,11 @@ public class CommentsRestTest {
     @ValueSource(longs = {1, 3, 4, 50})
     public void testDeleteComment(Long id) {
         given().
-                when().
+            when().
                 pathParam("postId", postId).
                 pathParam("id", id).
                 delete("/posts/{postId}/comments/{id}").
-                then().
+            then().
                 statusCode(204);
     }
 }

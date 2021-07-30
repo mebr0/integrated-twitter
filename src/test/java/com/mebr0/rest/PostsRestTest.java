@@ -7,69 +7,58 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 
 @QuarkusTest
 public class PostsRestTest {
 
     @Test
     public void testListPosts() {
-        var posts = given().
-                when().
+        given().
+            when().
                 get("/posts").
-                then().
+            then().
                 statusCode(200).
-                extract().body().as(Post[].class);
-
-        assertNotNull(posts);
-        assertTrue(posts.length > 0);
-
-        Arrays.stream(posts).forEach(post -> {
-            assertNotNull(post.getId());
-            assertNotNull(post.getTitle());
-            assertNotNull(post.getBody());
-            assertNotNull(post.getUserId());
-        });
+                body("$", notNullValue()).
+                body("$.size()", greaterThan(0)).
+                body("$.id", notNullValue()).
+                body("$.title", notNullValue()).
+                body("$.body", notNullValue()).
+                body("$userId", notNullValue());
     }
 
     @Test
     public void testCreatePost() {
         var postToCreate = new Post(null, "title", "body", null);
 
-        var createdPost = given().
-                when().
-                body(postToCreate).
+        given().
+            when().
                 contentType(ContentType.JSON).
+                body(postToCreate).
                 post("/posts").
-                then().
+            then().
                 statusCode(201).
-                extract().body().as(Post.class);
-
-        assertNotNull(createdPost);
-        assertNotNull(createdPost.getId());
-        assertEquals(postToCreate.getTitle(), createdPost.getTitle());
-        assertEquals(postToCreate.getBody(), createdPost.getBody());
+                body("$", notNullValue()).
+                body("id", notNullValue()).
+                body("title", equalTo(postToCreate.getTitle())).
+                body("body", equalTo(postToCreate.getBody()));
     }
 
     @ParameterizedTest
     @ValueSource(longs = {1, 3, 4, 50})
     public void testGetPost(long id) {
-        var post = given().
-                when().
+        given().
+            when().
                 pathParam("id", id).
                 get("/posts/{id}").
-                then().
+            then().
                 statusCode(200).
-                extract().body().as(Post.class);
-
-        assertNotNull(post);
-        assertNotNull(post.getId());
-        assertNotNull(post.getTitle());
-        assertNotNull(post.getBody());
-        assertNotNull(post.getUserId());
+                body("$", notNullValue()).
+                body("id", notNullValue()).
+                body("title", notNullValue()).
+                body("body", notNullValue()).
+                body("userId", notNullValue());
     }
 
     @ParameterizedTest
@@ -77,30 +66,28 @@ public class PostsRestTest {
     public void testUpdatePost(long id) {
         var postToUpdate = new Post(null, "title", "body", null);
 
-        var updatedPost = given().
-                when().
+        given().
+            when().
                 pathParam("id", id).
-                body(postToUpdate).
                 contentType(ContentType.JSON).
+                body(postToUpdate).
                 put("/posts/{id}").
-                then().
+            then().
                 statusCode(200).
-                extract().body().as(Post.class);
-
-        assertNotNull(updatedPost);
-        assertEquals(id, updatedPost.getId());
-        assertEquals(updatedPost.getTitle(), updatedPost.getTitle());
-        assertEquals(updatedPost.getBody(), updatedPost.getBody());
+                body("$", notNullValue()).
+                body("id", notNullValue()).
+                body("title", equalTo(postToUpdate.getTitle())).
+                body("body", equalTo(postToUpdate.getBody()));
     }
 
     @ParameterizedTest
     @ValueSource(longs = {1, 3, 4, 50})
     public void testDeletePost(long id) {
         given().
-                when().
+            when().
                 pathParam("id", id).
                 delete("/posts/{id}").
-                then().
+            then().
                 statusCode(204);
     }
 }
