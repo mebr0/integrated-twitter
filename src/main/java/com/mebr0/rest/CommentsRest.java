@@ -42,11 +42,11 @@ public class CommentsRest extends RouteBuilder {
                 setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201)).
                 endRest().
 
-            get("/posts/{postId}/comments/{id}").
+            get("/posts/{postId}/comments/{commentId}").
                 id("retrieve-comment-of-post-by-id").
                 description("Get comment of post by id").
                 param().name("postId").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
-                param().name("id").type(RestParamType.path).description("Unique id of comment").dataType("integer").endParam().
+                param().name("commentId").type(RestParamType.path).description("Unique id of comment").dataType("integer").endParam().
                 responseMessage().
                 code(200).message("Operation finished successfully").responseModel(Comment.class).
                 endResponseMessage().
@@ -56,11 +56,11 @@ public class CommentsRest extends RouteBuilder {
                 marshal().jaxb().
                 endRest().
 
-            put("/posts/{postId}/comments/{id}").
+            put("/posts/{postId}/comments/{commentId}").
                 id("update-comment-of-post-by-id").
                 description("Update comment of post by id").
                 param().name("postId").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
-                param().name("id").type(RestParamType.path).description("Unique id of comment").dataType("integer").endParam().
+                param().name("commentId").type(RestParamType.path).description("Unique id of comment").dataType("integer").endParam().
                 param().name("body").type(RestParamType.body).description("Body of post").dataType("Post").endParam().
                 responseMessage().
                 code(200).message("Operation finished successfully").responseModel(Comment.class).
@@ -72,11 +72,11 @@ public class CommentsRest extends RouteBuilder {
                 marshal().jaxb().
                 endRest().
 
-            delete("/posts/{postId}/comments/{id}").
+            delete("/posts/{postId}/comments/{commentId}").
                 id("delete-comment-of-post-by-id").
                 description("Delete comment of post by id").
                 param().name("postId").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
-                param().name("id").type(RestParamType.path).description("Unique id of comment").dataType("integer").endParam().
+                param().name("commentId").type(RestParamType.path).description("Unique id of comment").dataType("integer").endParam().
                 responseMessage().
                 code(204).message("Operation finished successfully").
                 endResponseMessage().

@@ -23,22 +23,22 @@ public class PostsDao extends RouteBuilder {
                 unmarshal().json(Post.class);
 
         from("direct:dao-get_post").
-                removeHeaders("CamelHttp*").
-                removeHeaders("Accept*").
-                toD("{{blogs.url}}/posts/${headers.id}?bridgeEndpoint=true").
+                removeHeaders("*", "postId", "commentId").
+                setHeader(Exchange.HTTP_METHOD, constant("GET")).
+                toD("{{blogs.url}}/posts/${headers.postId}?bridgeEndpoint=true").
                 unmarshal().json(Post.class);
 
         from("direct:dao-update_post").
                 removeHeaders("CamelHttp*").
                 removeHeaders("Accept*").
                 setHeader(Exchange.HTTP_METHOD, constant("PUT")).
-                toD("{{blogs.url}}/posts/${headers.id}?bridgeEndpoint=true").
+                toD("{{blogs.url}}/posts/${headers.postId}?bridgeEndpoint=true").
                 unmarshal().json(Post.class);
 
         from("direct:dao-delete_post").
                 removeHeaders("CamelHttp*").
                 removeHeaders("Accept*").
                 setHeader(Exchange.HTTP_METHOD, constant("DELETE")).
-                toD("{{blogs.url}}/posts/${headers.id}?bridgeEndpoint=true");
+                toD("{{blogs.url}}/posts/${headers.postId}?bridgeEndpoint=true");
     }
 }

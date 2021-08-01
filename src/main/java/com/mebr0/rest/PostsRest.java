@@ -39,10 +39,10 @@ public class PostsRest extends RouteBuilder {
                 setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201)).
                 endRest().
 
-            get("/posts/{id}").
+            get("/posts/{postId}").
                 id("retrieve-post").
                 description("Get post by id").
-                param().name("id").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
+                param().name("postId").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
                 responseMessage().
                     code(200).message("Operation finished successfully").responseModel(Post.class).
                 endResponseMessage().
@@ -52,10 +52,10 @@ public class PostsRest extends RouteBuilder {
                 marshal().json().
                 endRest().
 
-            put("/posts/{id}").
+            put("/posts/{postId}").
                 id("update-post").
                 description("Update post by id").
-                param().name("id").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
+                param().name("postId").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
                 param().name("body").type(RestParamType.body).description("Body of post").dataType("Post").endParam().
                 responseMessage().
                     code(200).message("Operation finished successfully").responseModel(Post.class).
@@ -67,10 +67,10 @@ public class PostsRest extends RouteBuilder {
                 marshal().json().
                 endRest().
 
-            delete("/posts/{id}").
+            delete("/posts/{postId}").
                 id("delete-post").
                 description("Delete post by id").
-                param().name("id").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
+                param().name("postId").type(RestParamType.path).description("Unique id of post").dataType("integer").endParam().
                 responseMessage().
                     code(204).message("Operation finished successfully").
                 endResponseMessage().

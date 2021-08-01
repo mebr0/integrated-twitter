@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "comment")
-@XmlType(propOrder = { "id", "name", "body", "email", "postId" })
+@XmlType(propOrder = { "id", "name", "body", "email", "postId", "post" })
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonPropertyOrder({ "id", "name", "body", "email", "postId" })
 @Getter
@@ -34,7 +34,19 @@ public class Comment {
     @XmlElement(name = "email")
     private String email;
 
-    @Schema(name = "postId", description = "Owner id", example = "2")
+    @Schema(name = "postId", description = "Post id", example = "2")
     @XmlElement(name = "postId")
     private Long postId;
+
+    @Schema(name = "post", description = "Post")
+    @XmlElement(name = "post")
+    private Post post;
+
+    /**
+     * Set {@link #post} and null {@link #postId}
+     */
+    public void setPost(Post post) {
+        this.post = post;
+        this.postId = null;
+    }
 }
