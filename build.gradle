@@ -31,6 +31,9 @@ dependencies {
     implementation 'org.apache.camel.quarkus:camel-quarkus-sql'
     implementation 'io.quarkus:quarkus-jdbc-postgresql'
 
+    // Caches
+    implementation 'org.apache.camel.quarkus:camel-quarkus-infinispan'
+
     // Serialization
     implementation 'org.apache.camel.quarkus:camel-quarkus-jackson'
     implementation 'org.apache.camel.quarkus:camel-quarkus-jaxb'
