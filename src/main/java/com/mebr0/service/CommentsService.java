@@ -17,15 +17,23 @@ public class CommentsService extends RouteBuilder {
                 enrich("direct:service-get_post", this::setPostOfComment);
 
         from("direct:service-get_comment").
-                to("direct:dao-get_comment").
+                to("direct:cache-get_comment").
+                choice().
+                    when(simple("${body} == null")).
+                        to("direct:dao-get_comment").
+                        to("direct:cache-put_comment").
+                    endChoice().
+                end().
                 enrich("direct:service-get_post", this::setPostOfComment);
 
         from("direct:service-update_comment").
                 to("direct:dao-update_comment").
+                to("direct:cache-delete_comment").
                 enrich("direct:service-get_post", this::setPostOfComment);
 
         from("direct:service-delete_comment").
-                to("direct:dao-delete_comment");
+                to("direct:dao-delete_comment").
+                to("direct:cache-delete_comment");
     }
 
     /**
