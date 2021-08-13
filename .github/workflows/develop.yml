@@ -33,6 +33,7 @@ jobs:
       - name: Deploy Infinispan with caches
         run: |
           sudo docker run -d -p 11222:11222 -e USER="user" -e PASS="pass" quay.io/infinispan/server-native:11.0
+          sleep 10
           curl -X POST localhost:11222/rest/v2/caches/posts
           curl -X POST localhost:11222/rest/v2/caches/comments
 
