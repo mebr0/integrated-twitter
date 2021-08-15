@@ -35,7 +35,7 @@ public class CommentsRestTest {
 
     @Test
     public void testCreateComment() {
-        var commentToCreate = new Comment(null, "name", "body", "email", null);
+        var commentToCreate = new Comment(null, "name", "body", "email", null, null);
 
         given().
             when().
@@ -50,7 +50,7 @@ public class CommentsRestTest {
                 body("comment.name", equalTo(commentToCreate.getName())).
                 body("comment.body", equalTo(commentToCreate.getBody())).
                 body("comment.email", equalTo(commentToCreate.getEmail())).
-                body("comment.postId", equalTo(postId.toString()));
+                body("comment.post.id", equalTo(postId.toString()));
     }
 
     @ParameterizedTest
@@ -74,7 +74,7 @@ public class CommentsRestTest {
     @ParameterizedTest
     @ValueSource(longs = {1, 3, 4, 50})
     public void testUpdateComment(Long id) {
-        var commentToUpdate = new Comment(null, "name", "body", "email", null);
+        var commentToUpdate = new Comment(null, "name", "body", "email", null, null);
 
         given().
             when().

@@ -41,7 +41,7 @@ public class CommentsDao extends RouteBuilder {
         from("direct:dao-get_comment").
                 removeHeaders("CamelHttp*").
                 removeHeaders("Accept*").
-                toD("{{blogs.url}}/comments/${headers.id}?bridgeEndpoint=true").
+                toD("{{blogs.url}}/comments/${headers.commentId}?bridgeEndpoint=true").
                 unmarshal().json(Comment.class);
 
         from("direct:dao-update_comment").
@@ -50,13 +50,13 @@ public class CommentsDao extends RouteBuilder {
                 unmarshal(jaxbCommentDataFormat).
                 marshal().json().
                 setHeader(Exchange.HTTP_METHOD, constant("PUT")).
-                toD("{{blogs.url}}/comments/${headers.id}?bridgeEndpoint=true").
+                toD("{{blogs.url}}/comments/${headers.commentId}?bridgeEndpoint=true").
                 unmarshal().json(Comment.class);
 
         from("direct:dao-delete_comment").
                 removeHeaders("CamelHttp*").
                 removeHeaders("Accept*").
                 setHeader(Exchange.HTTP_METHOD, constant("DELETE")).
-                toD("{{blogs.url}}/comments/${headers.id}?bridgeEndpoint=true");
+                toD("{{blogs.url}}/comments/${headers.commentId}?bridgeEndpoint=true");
     }
 }

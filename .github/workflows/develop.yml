@@ -30,8 +30,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Deploy Infinispan with caches
+        run: |
+          sudo docker run -d -p 11222:11222 -e USER="user" -e PASS="pass" quay.io/infinispan/server-native:11.0
+          sleep 10
+          curl -X POST localhost:11222/rest/v2/caches/posts -u user:pass
+          curl -X POST localhost:11222/rest/v2/caches/comments -u user:pass
+
       - name: Run tests
         run: ./gradlew test
+        env:
+          QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: localhost:11222
+          QUARKUS_INFINISPAN_CLIENT_AUTH_USERNAME: user
+          QUARKUS_INFINISPAN_CLIENT_AUTH_PASSWORD: pass
 
       - name: Cleanup Gradle cache
         run: |
