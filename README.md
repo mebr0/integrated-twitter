@@ -10,17 +10,19 @@ Service for social networks without own data, **INTEGRATION ONLY**.
 
 REST API
 
-- [ ] JSON and/or XML endpoints
-- [ ] Openapi & Swagger
+- [x] JSON and/or XML endpoints
+- [x] Openapi & Swagger
 - [ ] Validation
 
 Data
 
-- [ ] Transformations
+- [x] Transformations
+- [x] SQL Queries
+- [x] Caching
 
 HTTP
 
-- [ ] HTTP Requests
+- [x] HTTP Requests
 - [ ] HTTP Statuses (errors)
 
 Docker
@@ -30,7 +32,7 @@ Docker
 Tests
 
 - [x] Integration tests
-- [x] Coverage reports
+- [x] Jacoco reports
 - [x] Sonarqube reports
 
 ## Commands
