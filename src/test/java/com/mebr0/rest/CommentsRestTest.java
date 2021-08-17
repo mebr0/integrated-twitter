@@ -11,12 +11,12 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @QuarkusTest
-public class CommentsRestTest {
+class CommentsRestTest {
 
     private final Long postId = 1L;
 
     @Test
-    public void testListComments() {
+    void testListComments() {
         given().
             when().
                 pathParam("id", postId).
@@ -34,7 +34,7 @@ public class CommentsRestTest {
     }
 
     @Test
-    public void testCreateComment() {
+    void testCreateComment() {
         var commentToCreate = new Comment(null, "name", "body", "email", null, null);
 
         given().
@@ -55,7 +55,7 @@ public class CommentsRestTest {
 
     @ParameterizedTest
     @ValueSource(longs = {1, 3, 4, 50})
-    public void testGetComment(Long id) {
+    void testGetComment(Long id) {
         given().
             when().
                 pathParam("postId", postId).
@@ -73,7 +73,7 @@ public class CommentsRestTest {
 
     @ParameterizedTest
     @ValueSource(longs = {1, 3, 4, 50})
-    public void testUpdateComment(Long id) {
+    void testUpdateComment(Long id) {
         var commentToUpdate = new Comment(null, "name", "body", "email", null, null);
 
         given().
@@ -95,7 +95,7 @@ public class CommentsRestTest {
 
     @ParameterizedTest
     @ValueSource(longs = {1, 3, 4, 50})
-    public void testDeleteComment(Long id) {
+    void testDeleteComment(Long id) {
         given().
             when().
                 pathParam("postId", postId).
