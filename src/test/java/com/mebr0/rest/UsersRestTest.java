@@ -8,10 +8,10 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
-public class UsersRestTest {
+class UsersRestTest {
 
     @Test
-    public void testListPosts() {
+    void testListPosts() {
         given().
             when().
                 get("/users").
