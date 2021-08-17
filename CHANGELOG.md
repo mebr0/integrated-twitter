@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.1] - 2021-08-17
+
+### Fixed
+- CI-process for releases.
+
 ## [1.0.0] - 2021-08-17
 
 ### Added
@@ -12,3 +17,4 @@ All notable changes to this project will be documented in this file.
 
 [Unreleased]: https://github.com/mebr0/integrated-twitter/tree/develop
 [1.0.0]: https://github.com/mebr0/integrated-twitter/releases/tag/v1.0.0
+[1.0.1]: https://github.com/mebr0/integrated-twitter/releases/tag/v1.0.1
