@@ -17,9 +17,22 @@ dependencies {
     implementation 'io.quarkus:quarkus-arc'
     implementation 'org.apache.camel.quarkus:camel-quarkus-core'
     implementation 'org.apache.camel.quarkus:camel-quarkus-rest'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-direct'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-timer'
+    implementation 'org.apache.camel.quarkus:camel-quarkus-bean'
 
     // HTTP
     implementation 'org.apache.camel.quarkus:camel-quarkus-http'
+
+    // Security
+    implementation 'org.mindrot:jbcrypt:0.4'
+
+    // Databases
+    implementation 'org.apache.camel.quarkus:camel-quarkus-sql'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+
+    // Caches
+    implementation 'org.apache.camel.quarkus:camel-quarkus-infinispan'
 
     // Serialization
     implementation 'org.apache.camel.quarkus:camel-quarkus-jackson'
@@ -38,6 +51,7 @@ dependencies {
     // Tests
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
+    testImplementation 'io.quarkus:quarkus-jdbc-h2'
 }
 
 group 'com.mebr0'
@@ -78,6 +92,7 @@ jacocoTestReport {
 
 sonarqube {
     properties {
-        property 'sonar.host.url', 'https://sonarcloud.io'
+        property "sonar.organization", "mebr0"
+        property "sonar.host.url", "https://sonarcloud.io"
     }
 }
